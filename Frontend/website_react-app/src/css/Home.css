@@ -1,0 +1,33 @@
+#home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#homemainicon {
+    height: 50vh;
+    border-radius: 20px;
+}
+
+#datatabs {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.datatab {
+    width: 50vh;
+    height: 50vh;
+    background-color: rgba(28, 40, 51, 1);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.datatabtext {
+    color: white;
+    font-size: 2vh;
+    margin: 4vh;
+}
