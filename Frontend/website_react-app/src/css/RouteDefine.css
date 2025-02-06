@@ -1,0 +1,31 @@
+#routedefine {
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+}
+  
+.route-info {
+    min-width: 250px;
+}
+  
+.steps-list {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+  
+.step-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+  
+.total-time {
+    font-weight: bold;
+    color: #2c3e50;
+    padding-top: 10px;
+    border-top: 2px solid #3498db;
+}
