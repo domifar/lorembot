@@ -1,24 +1,37 @@
+import { useState, useEffect } from "react"
 import "../css/Home.css"
 import icon from "/main-icon.png"
 
-const Home = () => {
+const Home = (props) => {
+    const[BetrWeg, setBetrWeg] = useState([])
+
+    useEffect(() => {
+        fetch('http://192.168.0.135:3000/daten')
+        .then(response => response.json())
+        .then(data => setBetrWeg([
+            data.betriebsDauer,
+            data.wegStrecke
+        ]))
+        return
+      }, [])
+
     return(
         <div id="home">
             <div id="datatabs">
                 <div className="datatab">
                     <div className="datatabtext">
-                        IP-Adresse: asdf{}
+                        IP-Adresse: {props.IpName[0]}
                     </div>
                     <div className="datatabtext">
-                        Name: asdf{}
+                        Name: {props.IpName[1]}
                     </div>
                 </div>
                 <div className="datatab">
                     <div className="datatabtext">
-                        Gefahrene Strecke: asdf{}
+                        Gefahrene Strecke: {BetrWeg[0]}
                     </div>
                     <div className="datatabtext">
-                        Betriebsdauer: asdf{}
+                        Betriebsdauer: {BetrWeg[1]}
                     </div>
                 </div>
                 <img id="homemainicon" src={icon} alt="MBot Icon" />

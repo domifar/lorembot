@@ -1,27 +1,26 @@
 import { useState } from "react"
 import '../css/FirstConfig.css'
 
-function FirstConfig({ onComplete }) {
+const FirstConfig = (props) => {
   const [ipAddress, setIpAddress] = useState("")
   const [username, setUsername] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
 
   const sendData = () => {
-    // if(!isValidIpAddress()) {
-    //   setErrorMessage("IP Adresse nicht korrekt eingegeben!")
-    //   return
-    // }
-    // if(!isValidName()) {
-    //   setErrorMessage("Name nicht korrekt eingegeben!")
-    //   return
-    // }
-    // if (!ipAddress || !username) {
-    //     setErrorMessage("Bitte alle Felder ausfüllen!")
-    // }else {
-    //     onComplete(false)
-    //     return
-    // }
-    onComplete(false)
+    if (!ipAddress || !username) {
+      setErrorMessage("Bitte alle Felder ausfüllen!")
+      return
+    }
+    if(!isValidIpAddress()) {
+      setErrorMessage("IP Adresse nicht korrekt eingegeben!")
+      return
+    }
+    if(!isValidName()) {
+      setErrorMessage("Name nicht korrekt eingegeben!")
+      return
+    }
+    props.onComplete(false)
+    props.newData([ipAddress, username])
   }
 
   const isValidIpAddress = () => {

@@ -246,6 +246,8 @@
         margin: 2.5vh;
         padding: 2.5vh;
         width: 100%;
+        max-width: 73%;
+        max-height: 75vh;
     }
 }
 
