@@ -6,7 +6,7 @@ const Home = (props) => {
     const[BetrWeg, setBetrWeg] = useState([])
 
     useEffect(() => {
-        fetch('http://192.168.0.135:3000/daten')
+        fetch('http://' + props.IpName[0] + ':3000/daten')
         .then(response => response.json())
         .then(data => setBetrWeg([
             data.betriebsDauer,

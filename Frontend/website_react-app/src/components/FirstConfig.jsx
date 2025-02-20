@@ -1,31 +1,55 @@
 import { useState } from "react"
 import '../css/FirstConfig.css'
+import LoadingScreen from "./LoadingScreen"
 
 const FirstConfig = (props) => {
   const [ipAddress, setIpAddress] = useState("")
   const [username, setUsername] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
-  const sendData = () => {
+  const sendData = async () => {
     if (!ipAddress || !username) {
       setErrorMessage("Bitte alle Felder ausfüllen!")
       return
     }
-    if(!isValidIpAddress()) {
+    
+    setIsLoading(true)
+    setErrorMessage("")
+    
+    const isIpValid = await isValidIpAddress()
+    if(!isIpValid) {
       setErrorMessage("IP Adresse nicht korrekt eingegeben!")
+      setIsLoading(false)
       return
     }
+    
     if(!isValidName()) {
       setErrorMessage("Name nicht korrekt eingegeben!")
+      setIsLoading(false)
       return
     }
+    
     props.onComplete(false)
     props.newData([ipAddress, username])
+    setIsLoading(false)
   }
+  
 
-  const isValidIpAddress = () => {
+  const isValidIpAddress = async () => {
     const ipRegex = /^(25[0-5]|2[0-4][0-9]|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4][0-9]|1\d{2}|[1-9]?\d)){3}$/
-    return ipRegex.test(ipAddress)
+    
+    if (!ipRegex.test(ipAddress)) {
+      return false
+    }
+    
+    try {
+      const response = await fetch('http://' + ipAddress + ':3000/status')
+      const data = await response.json()
+      return data.status === 'passt'
+    } catch (error) {
+      return false
+    }
   }
 
   const isValidName = () => {
@@ -35,6 +59,7 @@ const FirstConfig = (props) => {
 
   return (
     <div id="modal-overlay-config">
+      {isLoading && <LoadingScreen/>}
       <div id="modal-content-config">
         <div id="firstconfigtitle">IP-Verbindung</div>
         <div id="datainputfields">

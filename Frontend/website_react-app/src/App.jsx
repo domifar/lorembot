@@ -20,7 +20,7 @@ function App() {
       ) : (
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Layout ip={IpName[0]}/>}>
               <Route index element={<Navigate to="/home" replace />} />
               <Route path="home" element={<Home IpName={IpName}/>} />
               <Route path="joystick" element={<Joystick />} />

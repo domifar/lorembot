@@ -3,7 +3,7 @@ import { useState } from "react"
 import LedSetting from "./LedSetting"
 import '../css/Layout.css'
 
-const Layout = () => {
+const Layout = (props) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [openSettingsTab, setOpenSettingsTab] = useState(true)
@@ -23,7 +23,7 @@ const Layout = () => {
     }
 
     const saveSetting = async () => {
-        const response = await fetch("http://192.168.0.135:3000/sendData", {
+        const response = await fetch('http://' + props.ip + ':3000/sendData', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
