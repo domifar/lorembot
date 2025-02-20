@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import LedSetting from "./LedSetting"
 import '../css/Layout.css'
 
@@ -13,6 +13,22 @@ const Layout = (props) => {
                                         "G": 255,
                                         "B": 255
                                     })
+    const [sensordaten, setSensordaten] = useState([0, 0])
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            fetch('http://' + props.ip + ':3000/sensor')
+            .then(response => response.json())
+            .then(data => {
+                setSensordaten([
+                    data.wandEntfernung,
+                    data.geschwindigkeit
+                ])
+            })
+        }, 1000)
+
+        return () => clearInterval(intervalId)
+      }, [])
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen)
@@ -50,8 +66,8 @@ const Layout = (props) => {
             </div>
 
             <div id="sensorwerte">
-                <div>Hindernisdistanz: 2,12 m</div>
-                <div>Geschwindigkeit: 5 km/h</div>
+                <div>Hindernisdistanz: {sensordaten[0]} m</div>
+                <div>Geschwindigkeit: {sensordaten[1]} km/h</div>
                 <div id="successconnect">Verbunden<i className="uil uil-check-circle"></i></div>
                 {/* <div id="failedconnect">Getrennt<i class="uil uil-cloud-slash"></i></div> */}
             </div>

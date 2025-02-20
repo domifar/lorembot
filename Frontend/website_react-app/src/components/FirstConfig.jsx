@@ -57,34 +57,39 @@ const FirstConfig = (props) => {
     return nameRegex.test(username)
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    sendData()
+  }
+
   return (
     <div id="modal-overlay-config">
       {isLoading && <LoadingScreen/>}
-      <div id="modal-content-config">
+      <form id="modal-content-config" onSubmit={handleSubmit}>
         <div id="firstconfigtitle">IP-Verbindung</div>
         <div id="datainputfields">
-            <div className="datainputfield">
-            <label>IP-Adresse</label>
-            <input
-                type="text"
-                value={ipAddress}
-                onChange={(e) => setIpAddress(e.target.value)}
-                placeholder="192.168.1.1"
-            />
-            </div>
-            <div className="datainputfield">
-            <label>Name</label>
-            <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Ihr Name"
-            />
-            </div>
-            <button onClick={sendData} id="confirmbutton">Bestätigen</button>
+          <div className="datainputfield">
+          <label>IP-Adresse</label>
+          <input
+              type="text"
+              value={ipAddress}
+              onChange={(e) => setIpAddress(e.target.value)}
+              placeholder="192.168.1.1"
+          />
+          </div>
+          <div className="datainputfield">
+          <label>Name</label>
+          <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Ihr Name"
+          />
+          </div>
+          <button onClick={sendData} id="confirmbutton">Bestätigen</button>
         </div>
         {errorMessage && <p id="errormessage">{errorMessage}</p>}
-      </div>
+      </form>
     </div>
   )
 }
