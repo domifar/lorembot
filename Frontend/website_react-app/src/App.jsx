@@ -12,17 +12,18 @@ import FirstConfig from "./components/FirstConfig"
 
 function App() {
   const [showFirstConfig, setShowFirstConfig] = useState(true)
-
+  const [IpName, setIpName] = useState([])
+  
   return (
     <div id='container1'>
       {showFirstConfig ? (
-        <FirstConfig onComplete={setShowFirstConfig} />
+        <FirstConfig onComplete={setShowFirstConfig} newData={setIpName}/>
       ) : (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Navigate to="/home" replace />} />
-              <Route path="home" element={<Home />} />
+              <Route path="home" element={<Home IpName={IpName}/>} />
               <Route path="joystick" element={<Joystick />} />
               <Route path="routedefine" element={<RouteDefine />} />
               <Route path="karte" element={<Karte />} />

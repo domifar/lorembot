@@ -23,7 +23,7 @@ const Layout = () => {
     }
 
     const saveSetting = async () => {
-        const response = await fetch("/led", {
+        const response = await fetch("http://192.168.0.135:3000/sendData", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

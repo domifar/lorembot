@@ -1,8 +1,10 @@
 const express = require('express')
+const cors = require("cors")
 const app = express()
 const port = 3000
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/sensor', (req, res) => {
   res.send(JSON.stringify({
@@ -32,7 +34,9 @@ app.get('/ip', (req, res) => {
 
 app.post('/sendData', (req, res) => {
   console.log('Request Body:', req.body)
-  res.send('Logged Data')
+  res.send(JSON.stringify({
+    message: 'Received Data'
+  }))
 })
 
 app.listen(port, () => {
