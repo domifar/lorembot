@@ -31,7 +31,7 @@ const Joystick = () => {
       </div>
 
       <div className="right">
-        leck
+        <img className="coban" src="coban.png" alt="" />
       </div>
     </div>
   );
