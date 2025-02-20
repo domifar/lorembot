@@ -26,4 +26,14 @@ export default defineConfig({
         ]
       }
   })],
+  server: {
+    host: true,
+    proxy: {
+      '/led': {
+        target: 'http://10.10.1.78:8080',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })
